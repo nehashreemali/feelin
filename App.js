@@ -1,23 +1,36 @@
-import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Home from "./Screens/Home";
-import SplashScreens from "./Screens/SplashScreens";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Home from "./Home";
+import Register from "./Screens/Register";
+import Login from "./Screens/Login";
 
-export default function App() {
-  const [loading, setLoading] = useState(true);
-  setTimeout(() => {
-    setLoading(false);
-  }, 4000);
+// Create a stack navigator
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      {loading ? <SplashScreens /> : <Home />}
-    </View>
-  );
-}
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        ></Stack.Screen>
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default App;
